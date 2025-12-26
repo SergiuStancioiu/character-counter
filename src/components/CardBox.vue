@@ -4,6 +4,7 @@ const props = defineProps({
   name: { type: String, required: true },
   backgroundImage: { type: String, required: true },
   backgroundColor: { type: String, required: true },
+  number: { type: Number, required: true },
 });
 
 const imageUrl = new URL(
@@ -18,7 +19,7 @@ const imageUrl = new URL(
     :style="{ backgroundColor }"
   >
     <div class="flex flex-col gap-2.5">
-      <h2 class="text-3xl font-medium">278</h2>
+      <h2 class="text-3xl font-medium">{{ props.number }}</h2>
       <p class="text-xl">{{ props.name }}</p>
     </div>
     <div class="-mr-13">

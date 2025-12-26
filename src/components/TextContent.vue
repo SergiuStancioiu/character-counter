@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+
 import Checkbox from './Checkbox.vue';
 import CardBox from './CardBox.vue';
 
@@ -22,6 +24,17 @@ const cardBoxArr = [
     backgroundColor: '#ff8159',
   },
 ];
+
+const totalCharacters = ref('');
+const excludeSpaces = ref(false);
+const setCharacterLimit = ref(false);
+
+const totalCharactersNumber = computed(() => {
+  if (excludeSpaces.value) {
+    return totalCharacters.value.replace(/\s+/g, '').length;
+  }
+  return totalCharacters.value.length;
+});
 </script>
 
 <template>
@@ -34,6 +47,7 @@ const cardBoxArr = [
       </h1>
       <div>
         <textarea
+          v-model="totalCharacters"
           class="w-full border-textarea-border-light border-2 bg-textarea-background-light pl-2.5 pt-2.5 h-50 rounded-md"
           name="analyze-text"
           id="analyze-text"
@@ -44,11 +58,13 @@ const cardBoxArr = [
             id="exclude-spaces"
             label="Exclude Spaces"
             name="exclude-spaces"
+            v-model="excludeSpaces"
           />
           <Checkbox
             id="set-character-limit"
             label="Set Character Limit"
             name="set-character-limit"
+            v-model="setCharacterLimit"
           />
         </div>
       </div>
@@ -63,6 +79,7 @@ const cardBoxArr = [
           :name="cardBox.name"
           :backgroundImage="cardBox.backgroundImage"
           :backgroundColor="cardBox.backgroundColor"
+          :number="totalCharactersNumber"
         />
       </div>
     </div>
