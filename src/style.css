@@ -1,3 +1,8 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-textarea-background-light: #f3f2f7;
+  --color-textarea-border-light: #e4e4f0;
+}
