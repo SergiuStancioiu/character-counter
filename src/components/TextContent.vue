@@ -22,6 +22,13 @@ const totalWordCountNumber = computed(() => {
 
   return wordCount;
 });
+
+const totalSentenceCountNumber = computed(() => {
+  const numOfSentences =
+    totalCharacters.value.match(/\b\p{L}+[.!?](\s|$)/gu)?.length ?? 0;
+
+  return numOfSentences;
+});
 </script>
 
 <template>
@@ -79,7 +86,7 @@ const totalWordCountNumber = computed(() => {
         name="Sentence Count"
         backgroundImage="pattern-sentence-count.svg"
         backgroundColor="#ff8159"
-        :number="totalWordCountNumber"
+        :number="totalSentenceCountNumber"
       />
     </div>
   </div>
