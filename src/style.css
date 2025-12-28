@@ -5,4 +5,6 @@
 @theme {
   --color-textarea-background-light: #f3f2f7;
   --color-textarea-border-light: #e4e4f0;
+  --color-input-border-light: #404153;
+  --color-warning-orange: #e36940;
 }

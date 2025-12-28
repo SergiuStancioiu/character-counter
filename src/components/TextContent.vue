@@ -7,6 +7,7 @@ import CardBox from './CardBox.vue';
 const totalCharacters = ref('');
 const excludeSpaces = ref(false);
 const setCharacterLimit = ref(false);
+const characterLimitNumber = ref(0);
 
 const totalCharactersNumber = computed(() => {
   if (excludeSpaces.value) {
@@ -29,6 +30,10 @@ const totalSentenceCountNumber = computed(() => {
 
   return numOfSentences;
 });
+
+const setCharacterLimitNumber = computed(() => {
+  return setCharacterLimit.value ? characterLimitNumber.value : 10000;
+});
 </script>
 
 <template>
@@ -46,20 +51,42 @@ const totalSentenceCountNumber = computed(() => {
           name="analyze-text"
           id="analyze-text"
           placeholder="Start typing here...(or paste your text)"
+          :maxlength="setCharacterLimitNumber"
         ></textarea>
-        <div>
+        <p
+          v-if="
+            setCharacterLimit &&
+            characterLimitNumber > 0 &&
+            totalCharacters.length == characterLimitNumber
+          "
+          class="flex gap-1 items-center text-warning-orange text-sm"
+        >
+          <img src="../assets/images/icon-info.svg" alt="Info Icon" />Limit
+          reached! Your text exceeds {{ characterLimitNumber }} characters.
+        </p>
+        <div class="flex flex-col gap-2">
           <Checkbox
             id="exclude-spaces"
             label="Exclude Spaces"
             name="exclude-spaces"
             v-model="excludeSpaces"
           />
-          <Checkbox
-            id="set-character-limit"
-            label="Set Character Limit"
-            name="set-character-limit"
-            v-model="setCharacterLimit"
-          />
+          <div class="flex gap-2.5 min-h-7">
+            <Checkbox
+              id="set-character-limit"
+              label="Set Character Limit"
+              name="set-character-limit"
+              v-model="setCharacterLimit"
+            />
+            <input
+              v-if="setCharacterLimit"
+              v-model.number="characterLimitNumber"
+              class="border-input-border-light border-2 rounded-md pl-2.5 max-w-13.75"
+              type="number"
+              name="Character Limit"
+              id="character-limit"
+            />
+          </div>
         </div>
       </div>
     </div>
