@@ -4,27 +4,6 @@ import { ref, computed } from 'vue';
 import Checkbox from './Checkbox.vue';
 import CardBox from './CardBox.vue';
 
-const cardBoxArr = [
-  {
-    id: 'total-characters',
-    name: 'Total Characters',
-    backgroundImage: 'pattern-character-count.svg',
-    backgroundColor: '#d3a1fa',
-  },
-  {
-    id: 'word-count',
-    name: 'Word Count',
-    backgroundImage: 'pattern-word-count.svg',
-    backgroundColor: '#ff9f00',
-  },
-  {
-    id: 'sentence-count',
-    name: 'Sentence Count',
-    backgroundImage: 'pattern-sentence-count.svg',
-    backgroundColor: '#ff8159',
-  },
-];
-
 const totalCharacters = ref('');
 const excludeSpaces = ref(false);
 const setCharacterLimit = ref(false);
@@ -34,6 +13,14 @@ const totalCharactersNumber = computed(() => {
     return totalCharacters.value.replace(/\s+/g, '').length;
   }
   return totalCharacters.value.length;
+});
+
+const totalWordCountNumber = computed(() => {
+  let wordCount = totalCharacters.value.split(' ').filter(function (n) {
+    return n != '';
+  }).length;
+
+  return wordCount;
 });
 </script>
 
@@ -47,7 +34,7 @@ const totalCharactersNumber = computed(() => {
       </h1>
       <div>
         <textarea
-          v-model="totalCharacters"
+          v-model.trim="totalCharacters"
           class="w-full border-textarea-border-light border-2 bg-textarea-background-light pl-2.5 pt-2.5 h-50 rounded-md"
           name="analyze-text"
           id="analyze-text"
@@ -73,15 +60,27 @@ const totalCharactersNumber = computed(() => {
       Approx. reading time: &lt;1 minute
     </div>
     <div class="flex flex-col gap-4 mb-8">
-      <div v-for="cardBox in cardBoxArr" :key="cardBox.id">
-        <CardBox
-          :id="cardBox.id"
-          :name="cardBox.name"
-          :backgroundImage="cardBox.backgroundImage"
-          :backgroundColor="cardBox.backgroundColor"
-          :number="totalCharactersNumber"
-        />
-      </div>
+      <CardBox
+        id="total-characters"
+        name="Total Characters"
+        backgroundImage="pattern-character-count.svg"
+        backgroundColor="#d3a1fa"
+        :number="totalCharactersNumber"
+      />
+      <CardBox
+        id="word-count"
+        name="Word Count"
+        backgroundImage="pattern-word-count.svg"
+        backgroundColor="#ff9f00"
+        :number="totalWordCountNumber"
+      />
+      <CardBox
+        id="sentence-count"
+        name="Sentence Count"
+        backgroundImage="pattern-sentence-count.svg"
+        backgroundColor="#ff8159"
+        :number="totalWordCountNumber"
+      />
     </div>
   </div>
 </template>
