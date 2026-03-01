@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 
 import Checkbox from './Checkbox.vue';
 import CardBox from './CardBox.vue';
+import LetterDensity from './LetterDensity.vue';
 
 const totalCharacters = ref('');
 const excludeSpaces = ref(false);
@@ -96,25 +97,26 @@ const setCharacterLimitNumber = computed(() => {
     <div class="flex flex-col gap-4 mb-8">
       <CardBox
         id="total-characters"
-        name="Total Characters"
+        title="Total Characters"
         backgroundImage="pattern-character-count.svg"
         backgroundColor="#d3a1fa"
         :number="totalCharactersNumber"
       />
       <CardBox
         id="word-count"
-        name="Word Count"
+        title="Word Count"
         backgroundImage="pattern-word-count.svg"
         backgroundColor="#ff9f00"
         :number="totalWordCountNumber"
       />
       <CardBox
         id="sentence-count"
-        name="Sentence Count"
+        title="Sentence Count"
         backgroundImage="pattern-sentence-count.svg"
         backgroundColor="#ff8159"
         :number="totalSentenceCountNumber"
       />
     </div>
+    <LetterDensity :text="totalCharacters" />
   </div>
 </template>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = defineProps({
-  id: { type: String, required: true },
-  label: { type: String, required: true },
-  name: { type: String, required: true },
-  modelValue: { type: Boolean, required: true },
-});
+export type CheckboxProps = {
+  id: string;
+  label: string;
+  name: string;
+  modelValue: boolean;
+};
+
+const props = defineProps<CheckboxProps>();
 
 const emit = defineEmits(['update:modelValue']);
 
