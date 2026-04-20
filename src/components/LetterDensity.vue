@@ -30,10 +30,11 @@ const letterCounts = computed<Array<[string, number]>>(() => {
 <template>
   <div class="flex flex-col gap-4">
     <div class="text-2xl text-black font-medium">Letter Density</div>
-    <div>
+    <div v-if="letterCounts.length > 0">
       <div v-for="[char, count] in letterCounts" :key="char">
         <RangeBar :label="char" :value="count" />
       </div>
     </div>
+    <div v-else>No characters found. Start typing to see letter density.</div>
   </div>
 </template>
