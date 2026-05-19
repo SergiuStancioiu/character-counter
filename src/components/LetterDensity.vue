@@ -36,7 +36,7 @@ const visibleLetterCounts = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4 pb-4">
     <div class="text-2xl text-black dark:text-white font-medium">
       Letter Density
     </div>
@@ -50,7 +50,7 @@ const visibleLetterCounts = computed(() => {
       <button
         v-if="letterCounts.length > 5"
         @click="showAll = !showAll"
-        class="mt-3 text-blue-500 hover:underline"
+        class="mt-3 dark:text-white hover:underline cursor-pointer"
       >
         {{ showAll ? 'See less' : 'See more' }}
       </button>
