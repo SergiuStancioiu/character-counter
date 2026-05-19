@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import RangeBar from './RangeBar.vue';
 
 export type LetterDensityProps = {
@@ -7,6 +7,9 @@ export type LetterDensityProps = {
 };
 
 const props = defineProps<LetterDensityProps>();
+
+const showAll = ref(false);
+
 const letterCounts = computed<Array<[string, number]>>(() => {
   const counts = new Map<string, number>();
 
@@ -26,15 +29,35 @@ const letterCounts = computed<Array<[string, number]>>(() => {
     return a[0].localeCompare(b[0]);
   });
 });
+
+const visibleLetterCounts = computed(() => {
+  return showAll.value ? letterCounts.value : letterCounts.value.slice(0, 5);
+});
 </script>
+
 <template>
   <div class="flex flex-col gap-4">
-    <div class="text-2xl text-black font-medium">Letter Density</div>
+    <div class="text-2xl text-black dark:text-white font-medium">
+      Letter Density
+    </div>
+
     <div v-if="letterCounts.length > 0">
-      <div v-for="[char, count] in letterCounts" :key="char">
+      <div v-for="[char, count] in visibleLetterCounts" :key="char">
         <RangeBar :label="char" :value="count" />
       </div>
+
+      <!-- See more / See less button -->
+      <button
+        v-if="letterCounts.length > 5"
+        @click="showAll = !showAll"
+        class="mt-3 text-blue-500 hover:underline"
+      >
+        {{ showAll ? 'See less' : 'See more' }}
+      </button>
     </div>
-    <div v-else>No characters found. Start typing to see letter density.</div>
+
+    <div v-else class="dark:text-white">
+      No characters found. Start typing to see letter density.
+    </div>
   </div>
 </template>
