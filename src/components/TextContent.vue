@@ -65,35 +65,36 @@ const setCharacterLimitNumber = computed(() => {
           <img src="../assets/images/icon-info.svg" alt="Info Icon" />Limit
           reached! Your text exceeds {{ characterLimitNumber }} characters.
         </p>
-        <div class="flex flex-col gap-2">
-          <Checkbox
-            id="exclude-spaces"
-            label="Exclude Spaces"
-            name="exclude-spaces"
-            v-model="excludeSpaces"
-          />
-          <div class="flex gap-2.5 min-h-7">
+        <div class="flex flex-col md:flex-row pb-11.25 md:justify-between">
+          <div class="flex flex-col gap-2 md:flex-row">
             <Checkbox
-              id="set-character-limit"
-              label="Set Character Limit"
-              name="set-character-limit"
-              v-model="setCharacterLimit"
+              id="exclude-spaces"
+              label="Exclude Spaces"
+              name="exclude-spaces"
+              v-model="excludeSpaces"
             />
-            <input
-              v-if="setCharacterLimit"
-              v-model.number="characterLimitNumber"
-              class="border-input-border-light border-2 rounded-md pl-2.5 max-w-13.75"
-              type="number"
-              name="Character Limit"
-              id="character-limit"
-            />
+            <div class="flex gap-2.5 min-h-7">
+              <Checkbox
+                id="set-character-limit"
+                label="Set Character Limit"
+                name="set-character-limit"
+                v-model="setCharacterLimit"
+              />
+              <input
+                v-if="setCharacterLimit"
+                v-model.number="characterLimitNumber"
+                class="border-input-border-light border-2 rounded-md pl-2.5 max-w-13.75"
+                type="number"
+                name="Character Limit"
+                id="character-limit"
+              />
+            </div>
           </div>
+          <div class="dark:text-white">Approx. reading time: &lt;1 minute</div>
         </div>
       </div>
     </div>
-    <div class="dark:text-white pb-11.25">
-      Approx. reading time: &lt;1 minute
-    </div>
+
     <div class="flex flex-col gap-4 mb-8">
       <CardBox
         id="total-characters"
