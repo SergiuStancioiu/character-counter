@@ -1,5 +1,5 @@
 <template>
-  <div class="range-bar">
+  <div class="range-bar dark:text-white">
     <div class="uppercase">{{ label }}</div>
     <div class="range-bar-track">
       <div
@@ -8,7 +8,9 @@
       ></div>
     </div>
 
-    <span class="range-bar-value"> {{ normalizedValue }}% </span>
+    <span class="range-bar-value dark:text-white">
+      {{ normalizedValue }}%
+    </span>
   </div>
 </template>
 
@@ -52,7 +54,7 @@ const normalizedValue = computed(() => {
 
 .range-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #22c55e);
+  background: #c084fc; /* purple-400 */
   transition: width 0.3s ease;
 }
 
@@ -60,6 +62,5 @@ const normalizedValue = computed(() => {
   min-width: 40px;
   text-align: right;
   font-size: 14px;
-  color: #374151;
 }
 </style>

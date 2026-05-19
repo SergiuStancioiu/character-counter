@@ -91,7 +91,7 @@ const setCharacterLimitNumber = computed(() => {
         </div>
       </div>
     </div>
-    <div class="dark:text-whit pb-11.25">
+    <div class="dark:text-white pb-11.25">
       Approx. reading time: &lt;1 minute
     </div>
     <div class="flex flex-col gap-4 mb-8">
